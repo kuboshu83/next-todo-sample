@@ -9,6 +9,11 @@ export const TodoItem: React.FC<TodoProps> = ({
     const updated = items.filter((x) => x.id != item.id);
     setItems(updated);
   };
+
+  const toLocaleDateString = (date: Date): string => {
+    return date.toString();
+  };
+
   return (
     <div>
       <div
@@ -27,9 +32,7 @@ export const TodoItem: React.FC<TodoProps> = ({
         <div className="flex">
           <div className="ml-2">
             期限：
-            {item.deadline
-              ? item.deadline.toLocaleDateString("sv-SE")
-              : undefined}
+            {item.deadline ? toLocaleDateString(item.deadline) : undefined}
           </div>
           <div className="ml-2">状態：{item.isDone ? "完了" : "進行中"}</div>
           <div className="ml-2">進捗：{item.progress}%</div>

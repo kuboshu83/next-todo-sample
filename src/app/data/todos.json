@@ -1,0 +1,31 @@
+{
+  "tasks": [
+    {
+      "id": "1",
+      "title": "Next.jsの勉強をする",
+      "body": "Next.jsを使用して簡単なTodoアプリのGUIを作成する。",
+      "deadline": "2024/8/10",
+      "isDone": false,
+      "progress": 10,
+      "group": "TodoUser"
+    },
+    {
+      "id": "2",
+      "title": "Typescriptの勉強をする",
+      "body": "本を読む。",
+      "deadline": "2024/8/10",
+      "isDone": false,
+      "progress": 30,
+      "group": null
+    },
+    {
+      "id": "3",
+      "title": "セキュリティの勉強をする",
+      "body": "本を読む。",
+      "deadline": "2024/8/10",
+      "isDone": false,
+      "progress": 30,
+      "group": null
+    }
+  ]
+}

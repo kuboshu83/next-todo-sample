@@ -1,12 +1,20 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TodoItem } from "./todoItem";
 import { Item } from "./types";
-import { todoItems } from "./data";
 
 const TodoList: React.FC = () => {
-  const [items, setItems] = useState<Item[]>(todoItems);
+  const [items, setItems] = useState<Item[]>([]);
+  useEffect(() => {
+    fetch(`http://localhost:3001/tasks`)
+      .then((x) => {
+        return x.json();
+      })
+      .then((x) => {
+        setItems(x);
+      });
+  }, []);
   return (
     <div className="flex bg-gray-300 justify-center items-center w-full">
       <div className="flex flex-col justify-center h-full w-auto">
