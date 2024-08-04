@@ -1,6 +1,11 @@
 import { deleteTodoById, getAllTodos } from "./api";
 import { Item, TodoProps } from "./types";
 
+const formatDate = (date?: Date): string | undefined => {
+  // return date?.toLocaleDateString("sv-SE"); //<=なぜか使えない
+  return date?.toString().replaceAll("-", "/").substring(0, 10);
+};
+
 export const TodoItem: React.FC<TodoProps> = ({
   item,
   items,
@@ -30,7 +35,7 @@ export const TodoItem: React.FC<TodoProps> = ({
         <div className="flex">
           <div className="ml-2">
             期限：
-            {item.deadline ? item.deadline.toString() : undefined}
+            {formatDate(item.deadline) ?? "未設定"}
           </div>
           <div className="ml-2">状態：{item.isDone ? "完了" : "進行中"}</div>
           <div className="ml-2">進捗：{item.progress}%</div>
