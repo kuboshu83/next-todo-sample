@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 
 type TodoItem = {
   id: string;
@@ -40,10 +42,27 @@ const todoItems: TodoItem[] = [
   },
 ];
 
-const Todo: React.FC<{ item: TodoItem }> = ({ item }: { item: TodoItem }) => {
+type TodoProps = {
+  item: TodoItem;
+  items: TodoItem[];
+  setItems: React.Dispatch<React.SetStateAction<TodoItem[]>>;
+};
+
+const Todo: React.FC<TodoProps> = ({ item, items, setItems }: TodoProps) => {
+  const deleteTodoItem = (item: TodoItem, items: TodoItem[]) => {
+    const updated = items.filter((x) => x.id != item.id);
+    setItems(updated);
+  };
   return (
     <div>
-      <div className="mr-2 flex flex-row-reverse">削除</div>
+      <div
+        className="mr-2 flex flex-row-reverse"
+        onClick={(e) => {
+          deleteTodoItem(item, items);
+        }}
+      >
+        削除
+      </div>
       <div className="flex justify-center text-3xl p-2">{item.title}</div>
       <div className="flex items-center w-full min-h-20 p-2 text-xl">
         {item.body}
@@ -71,14 +90,18 @@ const Todo: React.FC<{ item: TodoItem }> = ({ item }: { item: TodoItem }) => {
 };
 
 const Top: React.FC = () => {
+  const [items, setItems] = useState<TodoItem[]>(todoItems);
   return (
     <div className="flex bg-gray-300 justify-center items-center w-full">
       <div className="flex flex-col justify-center h-full w-auto">
         <ul>
-          {todoItems.map((todoItem) => {
+          {items.map((todoItem) => {
             return (
-              <li className="bg-white rounded-3xl p-2 m-2" key={todoItem.id}>
-                <Todo item={todoItem} />
+              <li
+                className="bg-white rounded-3xl p-2 m-2 min-w-1/2"
+                key={todoItem.id}
+              >
+                <Todo item={todoItem} items={items} setItems={setItems} />
               </li>
             );
           })}
