@@ -5,3 +5,7 @@ export const getAllTodos = async (): Promise<Item[]> => {
   const todos = res.json();
   return todos;
 };
+
+export const deleteTodoById = async (id: string): Promise<void> => {
+  fetch(`http://localhost:3001/tasks/${id}`, { method: "delete" });
+};

@@ -1,3 +1,4 @@
+import { deleteTodoById, getAllTodos } from "./api";
 import { Item, TodoProps } from "./types";
 
 export const TodoItem: React.FC<TodoProps> = ({
@@ -5,9 +6,11 @@ export const TodoItem: React.FC<TodoProps> = ({
   items,
   setItems,
 }: TodoProps) => {
-  const deleteTodoItem = (item: Item, items: Item[]) => {
-    const updated = items.filter((x) => x.id != item.id);
-    setItems(updated);
+  const deleteTodoItem = async (item: Item, items: Item[]): Promise<void> => {
+    await deleteTodoById(item.id);
+    const todos = await getAllTodos();
+    console.log(todos);
+    setItems(todos);
   };
 
   return (

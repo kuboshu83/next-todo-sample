@@ -13,7 +13,7 @@ const TodoList: React.FC = () => {
       setItems(todos);
     };
     fetchTodos();
-  }, []);
+  }, [items]);
   return (
     <div className="flex bg-gray-300 justify-center items-center w-full">
       <div className="flex flex-col justify-center h-full w-auto">
