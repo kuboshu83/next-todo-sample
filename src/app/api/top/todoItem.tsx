@@ -1,10 +1,4 @@
-import { Item } from "./page";
-
-type TodoProps = {
-  item: Item;
-  items: Item[];
-  setItems: React.Dispatch<React.SetStateAction<Item[]>>;
-};
+import { Item, TodoProps } from "./types";
 
 export const TodoItem: React.FC<TodoProps> = ({
   item,

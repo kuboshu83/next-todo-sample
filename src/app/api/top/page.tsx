@@ -2,48 +2,10 @@
 
 import React, { useState } from "react";
 import { TodoItem } from "./todoItem";
+import { Item } from "./types";
+import { todoItems } from "./data";
 
-export type Item = {
-  id: string;
-  title: string;
-  body: string;
-  deadline?: Date;
-  isDone: boolean;
-  progress: number;
-  group?: string;
-};
-
-const todoItems: Item[] = [
-  {
-    id: "1",
-    title: "Next.jsの勉強をする",
-    body: "Next.jsを使用して簡単なTodoアプリのGUIを作成する。",
-    deadline: new Date("2024/8/10"),
-    isDone: false,
-    progress: 10,
-    group: "TodoUser",
-  },
-  {
-    id: "2",
-    title: "Typescriptの勉強をする",
-    body: "本を読む。",
-    deadline: new Date("2024/8/10"),
-    isDone: false,
-    progress: 30,
-    group: undefined,
-  },
-  {
-    id: "3",
-    title: "セキュリティの勉強をする",
-    body: "本を読む。",
-    deadline: new Date("2024/8/10"),
-    isDone: false,
-    progress: 30,
-    group: undefined,
-  },
-];
-
-const Top: React.FC = () => {
+const TodoList: React.FC = () => {
   const [items, setItems] = useState<Item[]>(todoItems);
   return (
     <div className="flex bg-gray-300 justify-center items-center w-full">
@@ -65,4 +27,4 @@ const Top: React.FC = () => {
   );
 };
 
-export default Top;
+export default TodoList;
