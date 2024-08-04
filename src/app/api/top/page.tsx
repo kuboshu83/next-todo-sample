@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { TodoItem } from "./todoItem";
 import { Item } from "./types";
 import { getAllTodos } from "./api";
+import { AddTodo } from "./addTodo";
 
 const TodoList: React.FC = () => {
   const [items, setItems] = useState<Item[]>([]);
@@ -17,6 +18,12 @@ const TodoList: React.FC = () => {
   return (
     <div className="flex bg-gray-300 justify-center items-center w-full">
       <div className="flex flex-col justify-center h-full w-auto">
+        <button
+          className="bg-green-400 rounded-md p-1"
+          onClick={async () => {}}
+        >
+          新規作成
+        </button>
         <ul>
           {items.map((todoItem) => {
             return (
@@ -30,6 +37,7 @@ const TodoList: React.FC = () => {
           })}
         </ul>
       </div>
+      <AddTodo />
     </div>
   );
 };
