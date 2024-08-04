@@ -5,10 +5,10 @@ import { v4 as uuidv4 } from "uuid";
 import { addTodo, getAllTodos } from "./api";
 
 export const AddTodo: React.FC = () => {
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
-  const [group, setGroup] = useState("");
-  const [deadline, setDealLine] = useState(new Date());
+  const [title, setTitle] = useState<string>("");
+  const [body, setBody] = useState<string>("");
+  const [group, setGroup] = useState<string>("");
+  const [deadline, setDealLine] = useState<Date | undefined>(undefined);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -24,6 +24,14 @@ export const AddTodo: React.FC = () => {
     await addTodo(todo);
     var todos = await getAllTodos();
   };
+
+  const onCancel = () => {
+    setTitle("");
+    setBody("");
+    setGroup("");
+    setDealLine(undefined);
+  };
+
   return (
     <form
       className="flex flex-col  bg-white rounded-3xl p-5 min-w-1/2 gap-2"
@@ -48,7 +56,7 @@ export const AddTodo: React.FC = () => {
       <input
         type="date"
         className="border border-gray-400 rounded-md p-1"
-        value={deadline.toLocaleDateString("sv-SE")}
+        value={deadline?.toLocaleDateString("sv-SE")}
         onChange={(e) => setDealLine(new Date(Date.parse(e.target.value)))}
       />
       <input
@@ -58,7 +66,13 @@ export const AddTodo: React.FC = () => {
         onChange={(e) => setGroup(e.target.value)}
         className="border border-gray-400 rounded-md p-1"
       />
-      <button className="bg-blue-400 rounded-md">キャンセル</button>
+      <button
+        type="button"
+        className="bg-blue-400 rounded-md"
+        onClick={onCancel}
+      >
+        キャンセル
+      </button>
       <button type="submit" className="bg-blue-400 rounded-md">
         保存
       </button>
