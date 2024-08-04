@@ -1,3 +1,9 @@
+import TodoList from "./api/top/page";
+
 export default function Home() {
-  return <main>Hello Next.js</main>;
+  return (
+    <main className="w-full">
+      <TodoList />
+    </main>
+  );
 }
