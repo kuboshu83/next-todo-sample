@@ -10,11 +10,12 @@ const TodoList: React.FC = () => {
   const [items, setItems] = useState<Item[]>([]);
   useEffect(() => {
     const fetchTodos = async (): Promise<void> => {
+      console.log("get all todo is called");
       const todos = await getAllTodos();
       setItems(todos);
     };
     fetchTodos();
-  }, [items]);
+  }, []);
   return (
     <div className="flex bg-gray-300 justify-center items-center w-full">
       <div className="flex flex-col justify-center h-full w-auto">
@@ -37,7 +38,7 @@ const TodoList: React.FC = () => {
           })}
         </ul>
       </div>
-      <AddTodo />
+      <AddTodo setItems={setItems} />
     </div>
   );
 };

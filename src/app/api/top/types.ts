@@ -4,6 +4,10 @@ export type TodoProps = {
   setItems: React.Dispatch<React.SetStateAction<Item[]>>;
 };
 
+export type AddTodoProps = {
+  setItems: React.Dispatch<React.SetStateAction<Item[]>>;
+};
+
 export type Item = {
   id: string;
   title: string;

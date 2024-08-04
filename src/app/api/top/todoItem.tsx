@@ -9,7 +9,6 @@ export const TodoItem: React.FC<TodoProps> = ({
   const deleteTodoItem = async (item: Item, items: Item[]): Promise<void> => {
     await deleteTodoById(item.id);
     const todos = await getAllTodos();
-    console.log(todos);
     setItems(todos);
   };
 

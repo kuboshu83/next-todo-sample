@@ -1,14 +1,21 @@
 import { useState } from "react";
-import { Item } from "./types";
+import { AddTodoProps, Item } from "./types";
 import { randomUUID } from "crypto";
 import { v4 as uuidv4 } from "uuid";
 import { addTodo, getAllTodos } from "./api";
 
-export const AddTodo: React.FC = () => {
+export const AddTodo: React.FC<AddTodoProps> = ({ setItems }: AddTodoProps) => {
   const [title, setTitle] = useState<string>("");
   const [body, setBody] = useState<string>("");
   const [group, setGroup] = useState<string>("");
   const [deadline, setDealLine] = useState<Date | undefined>(undefined);
+
+  const clearForm = () => {
+    setTitle("");
+    setBody("");
+    setGroup("");
+    setDealLine(undefined);
+  };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,15 +28,14 @@ export const AddTodo: React.FC = () => {
       progress: 0,
       group: group ? group : undefined,
     };
+    clearForm();
     await addTodo(todo);
     var todos = await getAllTodos();
+    setItems(todos);
   };
 
   const onCancel = () => {
-    setTitle("");
-    setBody("");
-    setGroup("");
-    setDealLine(undefined);
+    clearForm();
   };
 
   return (

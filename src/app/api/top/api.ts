@@ -7,11 +7,11 @@ export const getAllTodos = async (): Promise<Item[]> => {
 };
 
 export const deleteTodoById = async (id: string): Promise<void> => {
-  fetch(`http://localhost:3001/tasks/${id}`, { method: "delete" });
+  await fetch(`http://localhost:3001/tasks/${id}`, { method: "delete" });
 };
 
 export const addTodo = async (item: Item): Promise<void> => {
-  fetch(`http://localhost:3001/tasks`, {
+  await fetch(`http://localhost:3001/tasks`, {
     method: "post",
     headers: {
       "Content-Type": "application/json",
