@@ -3,17 +3,16 @@
 import React, { useEffect, useState } from "react";
 import { TodoItem } from "./todoItem";
 import { Item } from "./types";
+import { getAllTodos } from "./api";
 
 const TodoList: React.FC = () => {
   const [items, setItems] = useState<Item[]>([]);
   useEffect(() => {
-    fetch(`http://localhost:3001/tasks`)
-      .then((x) => {
-        return x.json();
-      })
-      .then((x) => {
-        setItems(x);
-      });
+    const fetchTodos = async (): Promise<void> => {
+      const todos = await getAllTodos();
+      setItems(todos);
+    };
+    fetchTodos();
   }, []);
   return (
     <div className="flex bg-gray-300 justify-center items-center w-full">
