@@ -26,6 +26,31 @@
       "isDone": false,
       "progress": 30,
       "group": null
+    },
+    {
+      "id": "3a06f934-7994-48e3-9180-a7c4cbd35b56",
+      "title": "資料作成をする",
+      "body": "power pointで作成",
+      "isDone": false,
+      "progress": 0,
+      "group": "akira"
+    },
+    {
+      "id": "6a1a5577-c15a-47e8-988f-5f413cfae840",
+      "title": "統計学を勉強する",
+      "body": "基本数学から勉強する",
+      "deadline": "2024-08-13T00:00:00.000Z",
+      "isDone": false,
+      "progress": 0
+    },
+    {
+      "id": "5abdef67-b57c-4ac6-8f72-081043ee76ef",
+      "title": "Goの勉強会を開く",
+      "body": "努力目標",
+      "deadline": "2024-08-28T00:00:00.000Z",
+      "isDone": false,
+      "progress": 0,
+      "group": "Gophers"
     }
   ]
 }
