@@ -2,9 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { TodoItem } from "./todoItem";
-import { Todo } from "./types";
 import { getAllTodos } from "./api";
-import { AddTodo } from "./addTodo";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { setTodos } from "../../features/TodoListSlice";
@@ -38,7 +36,7 @@ const TodoList: React.FC = () => {
           );
         })}
       </ul>
-      {newTodoEditorEnabled ? <AddTodo /> : null}
+      {/* {newTodoEditorEnabled ? <AddTodo /> : null} */}
     </div>
   );
 };
