@@ -18,26 +18,18 @@ const TodoList: React.FC = () => {
   }, []);
   return (
     <div className="flex bg-gray-300 justify-center items-center w-full">
-      <div className="flex flex-col justify-center h-full w-auto">
-        <button
-          className="bg-green-400 rounded-md p-1"
-          onClick={async () => {}}
-        >
-          新規作成
-        </button>
-        <ul>
-          {items.map((todoItem) => {
-            return (
-              <li
-                className="bg-white rounded-3xl p-2 m-2 min-w-1/2"
-                key={todoItem.id}
-              >
-                <TodoItem item={todoItem} items={items} setItems={setItems} />
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+      <ul>
+        {items.map((todoItem) => {
+          return (
+            <li
+              className="bg-white rounded-3xl p-2 m-2 min-w-1/2"
+              key={todoItem.id}
+            >
+              <TodoItem item={todoItem} items={items} setItems={setItems} />
+            </li>
+          );
+        })}
+      </ul>
       <AddTodo setItems={setItems} />
     </div>
   );
