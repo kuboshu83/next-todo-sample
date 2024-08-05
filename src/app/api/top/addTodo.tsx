@@ -19,7 +19,7 @@ export const AddTodo: React.FC<AddTodoProps> = ({ setItems }: AddTodoProps) => {
   };
   const [todo, setTodo] = useState<Todo>(initialTodo);
 
-  const clearForm = () => {
+  const resetForm = () => {
     setTodo(initialTodo);
   };
 
@@ -30,7 +30,7 @@ export const AddTodo: React.FC<AddTodoProps> = ({ setItems }: AddTodoProps) => {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    clearForm();
+    resetForm();
     await addTodo(todo);
     var todos = await getAllTodos();
     setItems(todos);
@@ -38,7 +38,7 @@ export const AddTodo: React.FC<AddTodoProps> = ({ setItems }: AddTodoProps) => {
   };
 
   const onCancel = () => {
-    clearForm();
+    resetForm();
     closeNewTodoEditor();
   };
 
