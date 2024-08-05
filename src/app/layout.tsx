@@ -24,7 +24,7 @@ export default function RootLayout({
             <div className="h-24 sticky top-0 bg-white shadow-lg">
               <Header />
             </div>
-            <div className="flex flex-1 bg-cyan-400">{children}</div>
+            <div className="flex flex-1">{children}</div>
           </StoreProvider>
         </div>
       </body>
