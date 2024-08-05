@@ -18,6 +18,7 @@ export type NewTodoState = {
 
 export type EditTodoState = {
   enabled: boolean;
+  target?: Todo;
 };
 
 export type TodoListState = {
