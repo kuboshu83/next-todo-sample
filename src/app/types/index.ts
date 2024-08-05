@@ -1,4 +1,12 @@
-import { Todo } from "../api/top/types";
+export type Todo = {
+  id: string;
+  title: string;
+  body: string;
+  deadline?: Date;
+  isDone: boolean;
+  progress: number;
+  group?: string;
+};
 
 export type LoginStatus = {
   logined: boolean;
