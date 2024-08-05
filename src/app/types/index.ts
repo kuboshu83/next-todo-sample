@@ -8,11 +8,11 @@ export type Todo = {
   group?: string;
 };
 
-export type LoginStatus = {
+export type LoginState = {
   logined: boolean;
 };
 
-export type NewTodoStatus = {
+export type NewTodoState = {
   enabled: boolean;
 };
 

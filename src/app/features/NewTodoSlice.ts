@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { NewTodoStatus } from "../types";
+import { NewTodoState } from "../types";
 
-const initialState: NewTodoStatus = {
+const initialState: NewTodoState = {
   enabled: false,
 };
 
