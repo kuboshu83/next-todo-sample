@@ -16,6 +16,10 @@ export type NewTodoStatus = {
   enabled: boolean;
 };
 
+export type EditTodoState = {
+  enabled: boolean;
+};
+
 export type TodoListState = {
   todos: Todo[];
 };

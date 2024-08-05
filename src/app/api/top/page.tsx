@@ -36,7 +36,6 @@ const TodoList: React.FC = () => {
           );
         })}
       </ul>
-      {/* {newTodoEditorEnabled ? <AddTodo /> : null} */}
     </div>
   );
 };

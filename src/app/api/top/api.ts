@@ -1,4 +1,4 @@
-import { Todo } from "./types";
+import { Todo } from "../../types";
 
 export const getAllTodos = async (): Promise<Todo[]> => {
   const res = await fetch(`http://localhost:3001/tasks`);
@@ -17,5 +17,15 @@ export const addTodo = async (item: Todo): Promise<void> => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(item),
+  });
+};
+
+export const updateTodo = async (todo: Todo): Promise<void> => {
+  await fetch(`http://localhost:3001/tasks/${todo.id}`, {
+    method: "put",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(todo),
   });
 };
