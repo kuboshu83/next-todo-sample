@@ -46,7 +46,6 @@ export const TodoItem: React.FC<Props> = ({ todo }: Props) => {
       <Modal isOpen={isEditTodoEnabled} style={customStyles}>
         <EditTodo todo={todo} />
       </Modal>
-      ;
       <div
         className="mr-2 flex flex-row-reverse"
         onClick={(e) => {
