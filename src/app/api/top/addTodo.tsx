@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { addTodo, getAllTodos } from "./api";
 import { useDispatch } from "react-redux";
 import { disable as disableTodoEditor } from "../../features/NewTodoSlice";
-import { Todo } from "./types";
+import { Todo } from "../../types";
 import { setTodos } from "../../features/TodoListSlice";
 
 export const AddTodo: React.FC = () => {
