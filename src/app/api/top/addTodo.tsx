@@ -8,16 +8,19 @@ import { useDispatch } from "react-redux";
 import { disable as disableTodoEditor } from "../../features/NewTodoSlice";
 
 export const AddTodo: React.FC<AddTodoProps> = ({ setItems }: AddTodoProps) => {
-  const [title, setTitle] = useState<string>("");
-  const [body, setBody] = useState<string>("");
-  const [group, setGroup] = useState<string>("");
-  const [deadline, setDealLine] = useState<Date | undefined>(undefined);
+  const initialTodo: Todo = {
+    id: uuidv4(),
+    title: "",
+    body: "",
+    deadline: undefined,
+    isDone: false,
+    progress: 0,
+    group: undefined,
+  };
+  const [todo, setTodo] = useState<Todo>(initialTodo);
 
   const clearForm = () => {
-    setTitle("");
-    setBody("");
-    setGroup("");
-    setDealLine(undefined);
+    setTodo(initialTodo);
   };
 
   const dispatch = useDispatch();
@@ -27,15 +30,6 @@ export const AddTodo: React.FC<AddTodoProps> = ({ setItems }: AddTodoProps) => {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const todo: Todo = {
-      id: uuidv4(),
-      title: title,
-      body: body,
-      deadline: deadline,
-      isDone: false,
-      progress: 0,
-      group: group ? group : undefined,
-    };
     clearForm();
     await addTodo(todo);
     var todos = await getAllTodos();
@@ -59,27 +53,29 @@ export const AddTodo: React.FC<AddTodoProps> = ({ setItems }: AddTodoProps) => {
         type="text"
         className="flex justify-center text-3xl p-2 border border-gray-400 rounded-md"
         placeholder="title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        value={todo.title}
+        onChange={(e) => setTodo({ ...todo, title: e.target.value })}
       />
       <input
         type="text"
         className="flex items-center w-full min-h-20 p-2 border border-gray-400 rounded-md"
         placeholder="todo body ..."
-        value={body}
-        onChange={(e) => setBody(e.target.value)}
+        value={todo.body}
+        onChange={(e) => setTodo({ ...todo, body: e.target.value })}
       />
       <input
         type="date"
         className="border border-gray-400 rounded-md p-1"
-        value={deadline?.toLocaleDateString("sv-SE")}
-        onChange={(e) => setDealLine(new Date(Date.parse(e.target.value)))}
+        value={todo.deadline?.toLocaleDateString("sv-SE")}
+        onChange={(e) =>
+          setTodo({ ...todo, deadline: new Date(Date.parse(e.target.value)) })
+        }
       />
       <input
         type="text"
         placeholder="group"
-        value={group}
-        onChange={(e) => setGroup(e.target.value)}
+        value={todo.group}
+        onChange={(e) => setTodo({ ...todo, group: e.target.value })}
         className="border border-gray-400 rounded-md p-1"
       />
       <button
