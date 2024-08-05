@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { AddTodoProps, Item } from "./types";
+import { AddTodoProps, Todo } from "./types";
 import { v4 as uuidv4 } from "uuid";
 import { addTodo, getAllTodos } from "./api";
 import { useDispatch } from "react-redux";
@@ -27,7 +27,7 @@ export const AddTodo: React.FC<AddTodoProps> = ({ setItems }: AddTodoProps) => {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const todo: Item = {
+    const todo: Todo = {
       id: uuidv4(),
       title: title,
       body: body,

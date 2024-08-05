@@ -2,14 +2,14 @@
 
 import React, { useEffect, useState } from "react";
 import { TodoItem } from "./todoItem";
-import { Item } from "./types";
+import { Todo } from "./types";
 import { getAllTodos } from "./api";
 import { AddTodo } from "./addTodo";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 
 const TodoList: React.FC = () => {
-  const [items, setItems] = useState<Item[]>([]);
+  const [items, setItems] = useState<Todo[]>([]);
   useEffect(() => {
     const fetchTodos = async (): Promise<void> => {
       console.log("get all todo is called");

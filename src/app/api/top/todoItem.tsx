@@ -1,5 +1,5 @@
 import { deleteTodoById, getAllTodos } from "./api";
-import { Item, TodoProps } from "./types";
+import { Todo, TodoProps } from "./types";
 
 const formatDate = (date?: Date): string | undefined => {
   // return date?.toLocaleDateString("sv-SE"); //<=なぜか使えない
@@ -11,7 +11,7 @@ export const TodoItem: React.FC<TodoProps> = ({
   items,
   setItems,
 }: TodoProps) => {
-  const deleteTodoItem = async (item: Item, items: Item[]): Promise<void> => {
+  const deleteTodoItem = async (item: Todo, items: Todo[]): Promise<void> => {
     await deleteTodoById(item.id);
     const todos = await getAllTodos();
     setItems(todos);

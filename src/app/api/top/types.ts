@@ -1,14 +1,14 @@
 export type TodoProps = {
-  item: Item;
-  items: Item[];
-  setItems: React.Dispatch<React.SetStateAction<Item[]>>;
+  item: Todo;
+  items: Todo[];
+  setItems: React.Dispatch<React.SetStateAction<Todo[]>>;
 };
 
 export type AddTodoProps = {
-  setItems: React.Dispatch<React.SetStateAction<Item[]>>;
+  setItems: React.Dispatch<React.SetStateAction<Todo[]>>;
 };
 
-export type Item = {
+export type Todo = {
   id: string;
   title: string;
   body: string;
