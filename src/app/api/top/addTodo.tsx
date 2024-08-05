@@ -35,6 +35,7 @@ export const AddTodo: React.FC<AddTodoProps> = ({ setItems }: AddTodoProps) => {
     await addTodo(todo);
     var todos = await getAllTodos();
     setItems(todos);
+    dispatch(disable());
   };
 
   const dispatch = useDispatch();
