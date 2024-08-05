@@ -5,6 +5,8 @@ import { TodoItem } from "./todoItem";
 import { Item } from "./types";
 import { getAllTodos } from "./api";
 import { AddTodo } from "./addTodo";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 
 const TodoList: React.FC = () => {
   const [items, setItems] = useState<Item[]>([]);
@@ -16,6 +18,9 @@ const TodoList: React.FC = () => {
     };
     fetchTodos();
   }, []);
+  const newTodoEditorEnabled = useSelector(
+    (state: RootState) => state.newtodo.enabled
+  );
   return (
     <div className="flex bg-gray-300 justify-center items-center w-full">
       <ul>
@@ -30,7 +35,7 @@ const TodoList: React.FC = () => {
           );
         })}
       </ul>
-      <AddTodo setItems={setItems} />
+      {newTodoEditorEnabled ? <AddTodo setItems={setItems} /> : null}
     </div>
   );
 };

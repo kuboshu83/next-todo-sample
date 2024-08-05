@@ -1,8 +1,11 @@
+"use client";
+
 import { useState } from "react";
 import { AddTodoProps, Item } from "./types";
-import { randomUUID } from "crypto";
 import { v4 as uuidv4 } from "uuid";
 import { addTodo, getAllTodos } from "./api";
+import { useDispatch } from "react-redux";
+import { disable } from "../../features/NewTodoSlice";
 
 export const AddTodo: React.FC<AddTodoProps> = ({ setItems }: AddTodoProps) => {
   const [title, setTitle] = useState<string>("");
@@ -34,8 +37,11 @@ export const AddTodo: React.FC<AddTodoProps> = ({ setItems }: AddTodoProps) => {
     setItems(todos);
   };
 
+  const dispatch = useDispatch();
+
   const onCancel = () => {
     clearForm();
+    dispatch(disable());
   };
 
   return (
