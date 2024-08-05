@@ -1,20 +1,27 @@
+import { useDispatch } from "react-redux";
 import { deleteTodoById, getAllTodos } from "./api";
-import { Todo, TodoProps } from "./types";
+import { Todo } from "./types";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
+import { setTodos } from "../../features/TodoListSlice";
 
 const formatDate = (date?: Date): string | undefined => {
   // return date?.toLocaleDateString("sv-SE"); //<=なぜか使えない
   return date?.toString().replaceAll("-", "/").substring(0, 10);
 };
 
-export const TodoItem: React.FC<TodoProps> = ({
-  item,
-  items,
-  setItems,
-}: TodoProps) => {
-  const deleteTodoItem = async (item: Todo, items: Todo[]): Promise<void> => {
+type Props = {
+  todo: Todo;
+};
+
+export const TodoItem: React.FC<Props> = ({ todo }: Props) => {
+  const dispatch = useDispatch();
+  const todos = useSelector((state: RootState) => state.todolist.todos);
+
+  const deleteTodoItem = async (item: Todo): Promise<void> => {
     await deleteTodoById(item.id);
-    const todos = await getAllTodos();
-    setItems(todos);
+    const fetchedTodos = await getAllTodos();
+    dispatch(setTodos(fetchedTodos));
   };
 
   return (
@@ -22,26 +29,26 @@ export const TodoItem: React.FC<TodoProps> = ({
       <div
         className="mr-2 flex flex-row-reverse"
         onClick={(e) => {
-          deleteTodoItem(item, items);
+          deleteTodoItem(todo);
         }}
       >
         削除
       </div>
-      <div className="flex justify-center text-3xl p-2">{item.title}</div>
+      <div className="flex justify-center text-3xl p-2">{todo.title}</div>
       <div className="flex items-center w-full min-h-20 p-2 text-xl">
-        {item.body}
+        {todo.body}
       </div>
       <div className="flex justify-between text-sm">
         <div className="flex">
           <div className="ml-2">
             期限：
-            {formatDate(item.deadline) ?? "未設定"}
+            {formatDate(todo.deadline) ?? "未設定"}
           </div>
-          <div className="ml-2">状態：{item.isDone ? "完了" : "進行中"}</div>
-          <div className="ml-2">進捗：{item.progress}%</div>
+          <div className="ml-2">状態：{todo.isDone ? "完了" : "進行中"}</div>
+          <div className="ml-2">進捗：{todo.progress}%</div>
         </div>
         <div>
-          {item.group && <div className="ml-2">group: {item.group}</div>}
+          {todo.group && <div className="ml-2">group: {todo.group}</div>}
         </div>
         <div className="flex">
           <div className="mr-2">編集</div>

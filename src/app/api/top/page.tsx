@@ -7,14 +7,17 @@ import { getAllTodos } from "./api";
 import { AddTodo } from "./addTodo";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
+import { setTodos } from "../../features/TodoListSlice";
+import { useDispatch } from "react-redux";
 
 const TodoList: React.FC = () => {
-  const [items, setItems] = useState<Todo[]>([]);
+  const dispatch = useDispatch();
+  const todos = useSelector((state: RootState) => state.todolist.todos);
   useEffect(() => {
     const fetchTodos = async (): Promise<void> => {
       console.log("get all todo is called");
-      const todos = await getAllTodos();
-      setItems(todos);
+      const fetchedTodos = await getAllTodos();
+      dispatch(setTodos(fetchedTodos));
     };
     fetchTodos();
   }, []);
@@ -24,18 +27,18 @@ const TodoList: React.FC = () => {
   return (
     <div className="flex bg-gray-300 justify-center items-center w-full">
       <ul>
-        {items.map((todoItem) => {
+        {todos.map((todo) => {
           return (
             <li
               className="bg-white rounded-3xl p-2 m-2 min-w-1/2"
-              key={todoItem.id}
+              key={todo.id}
             >
-              <TodoItem item={todoItem} items={items} setItems={setItems} />
+              <TodoItem todo={todo} />
             </li>
           );
         })}
       </ul>
-      {newTodoEditorEnabled ? <AddTodo setItems={setItems} /> : null}
+      {newTodoEditorEnabled ? <AddTodo /> : null}
     </div>
   );
 };

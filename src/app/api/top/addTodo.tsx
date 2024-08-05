@@ -1,13 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { AddTodoProps, Todo } from "./types";
 import { v4 as uuidv4 } from "uuid";
 import { addTodo, getAllTodos } from "./api";
 import { useDispatch } from "react-redux";
 import { disable as disableTodoEditor } from "../../features/NewTodoSlice";
+import { Todo } from "./types";
+import { setTodos } from "../../features/TodoListSlice";
 
-export const AddTodo: React.FC<AddTodoProps> = ({ setItems }: AddTodoProps) => {
+export const AddTodo: React.FC = () => {
   const initialTodo: Todo = {
     id: uuidv4(),
     title: "",
@@ -32,8 +33,8 @@ export const AddTodo: React.FC<AddTodoProps> = ({ setItems }: AddTodoProps) => {
     e.preventDefault();
     resetForm();
     await addTodo(todo);
-    var todos = await getAllTodos();
-    setItems(todos);
+    var fetchedTodos = await getAllTodos();
+    dispatch(setTodos(fetchedTodos));
     closeNewTodoEditor();
   };
 
