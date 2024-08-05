@@ -5,7 +5,7 @@ import { AddTodoProps, Item } from "./types";
 import { v4 as uuidv4 } from "uuid";
 import { addTodo, getAllTodos } from "./api";
 import { useDispatch } from "react-redux";
-import { disable } from "../../features/NewTodoSlice";
+import { disable as disableTodoEditor } from "../../features/NewTodoSlice";
 
 export const AddTodo: React.FC<AddTodoProps> = ({ setItems }: AddTodoProps) => {
   const [title, setTitle] = useState<string>("");
@@ -18,6 +18,11 @@ export const AddTodo: React.FC<AddTodoProps> = ({ setItems }: AddTodoProps) => {
     setBody("");
     setGroup("");
     setDealLine(undefined);
+  };
+
+  const dispatch = useDispatch();
+  const closeNewTodoEditor = () => {
+    dispatch(disableTodoEditor());
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -35,14 +40,12 @@ export const AddTodo: React.FC<AddTodoProps> = ({ setItems }: AddTodoProps) => {
     await addTodo(todo);
     var todos = await getAllTodos();
     setItems(todos);
-    dispatch(disable());
+    closeNewTodoEditor();
   };
-
-  const dispatch = useDispatch();
 
   const onCancel = () => {
     clearForm();
-    dispatch(disable());
+    closeNewTodoEditor();
   };
 
   return (
